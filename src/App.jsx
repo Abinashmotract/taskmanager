@@ -25,16 +25,11 @@ const TaskManagerContent = () => {
   const handleDragEnd = useCallback(
     (result) => {
       const { destination, source, draggableId } = result;
-
-      console.log('Drag ended:', { destination, source, draggableId });
-
-      // If dropped outside a droppable area
+      // console.log('Drag ended:', { destination, source, draggableId });
       if (!destination) {
         console.log('No destination, cancelling drag');
         return;
       }
-
-      // If dropped in the same position
       if (
         destination.droppableId === source.droppableId &&
         destination.index === source.index
@@ -42,10 +37,8 @@ const TaskManagerContent = () => {
         console.log('Same position, cancelling drag');
         return;
       }
-
-      // Moving between columns
       if (destination.droppableId !== source.droppableId) {
-        console.log('Moving between columns:', source.droppableId, '->', destination.droppableId);
+        // console.log('Moving between columns:', source.droppableId, '->', destination.droppableId);
         moveTask(
           draggableId,
           source.droppableId,
@@ -53,8 +46,7 @@ const TaskManagerContent = () => {
           destination.index
         );
       } else {
-        // Reordering within the same column
-        console.log('Reordering within column:', source.droppableId);
+        // console.log('Reordering within column:', source.droppableId);
         reorderTask(
           draggableId,
           source.index,
@@ -68,10 +60,9 @@ const TaskManagerContent = () => {
 
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
-      {/* App Bar */}
-      <AppBar 
-        position="sticky" 
-        elevation={0} 
+      <AppBar
+        position="sticky"
+        elevation={0}
         sx={{
           backgroundColor: mode === 'dark' ? '#1e1e1e' : '#fff',
           borderBottom: '1px solid',
@@ -79,12 +70,12 @@ const TaskManagerContent = () => {
         }}
       >
         <Toolbar>
-          <Typography 
-            variant="h5" 
-            component="div" 
-            sx={{ 
-              flexGrow: 1, 
-              fontWeight: 700, 
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              fontWeight: 700,
               color: mode === 'dark' ? '#fff' : '#000',
             }}
           >
@@ -92,7 +83,7 @@ const TaskManagerContent = () => {
           </Typography>
           <IconButton
             onClick={toggleTheme}
-            sx={{ 
+            sx={{
               mr: 2,
               color: mode === 'dark' ? '#fff' : '#000',
             }}
@@ -121,48 +112,16 @@ const TaskManagerContent = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Main Content */}
       <Container maxWidth="xl" sx={{ py: 4 }}>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(3, 1fr)',
-              },
-              gap: 3,
-            }}
-          >
-            {/* All Tasks Column */}
-            <TaskColumn
-              columnId="all"
-              title="All Tasks"
-              color="primary"
-            />
-
-            {/* Pending Tasks Column */}
-            <TaskColumn
-              columnId="pending"
-              title="Pending"
-              color="warning"
-            />
-
-            {/* Completed Tasks Column */}
-            <TaskColumn
-              columnId="completed"
-              title="Completed"
-              color="success"
-            />
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', }, gap: 3, }}>
+            <TaskColumn columnId="all" title="All Tasks" color="primary" />
+            <TaskColumn columnId="pending" title="Pending" color="warning" />
+            <TaskColumn columnId="completed" title="Completed" color="success" />
           </Box>
         </DragDropContext>
       </Container>
-
-      <AddTaskDialog
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-      />
+      <AddTaskDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
     </Box>
   );
 };
