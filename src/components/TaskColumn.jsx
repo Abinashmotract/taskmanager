@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable } from '@hello-pangea/dnd';
 import { Box, Typography, Paper } from '@mui/material';
 import { useTaskContext } from '../context/TaskContext';
 import TaskItem from './TaskItem';

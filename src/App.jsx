@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext } from '@hello-pangea/dnd';
 import {
   Container,
   Box,
@@ -25,20 +25,19 @@ const TaskManagerContent = () => {
   const handleDragEnd = useCallback(
     (result) => {
       const { destination, source, draggableId } = result;
-      // console.log('Drag ended:', { destination, source, draggableId });
+      
       if (!destination) {
-        console.log('No destination, cancelling drag');
         return;
       }
+      
       if (
         destination.droppableId === source.droppableId &&
         destination.index === source.index
       ) {
-        console.log('Same position, cancelling drag');
         return;
       }
+      
       if (destination.droppableId !== source.droppableId) {
-        // console.log('Moving between columns:', source.droppableId, '->', destination.droppableId);
         moveTask(
           draggableId,
           source.droppableId,
@@ -46,7 +45,6 @@ const TaskManagerContent = () => {
           destination.index
         );
       } else {
-        // console.log('Reordering within column:', source.droppableId);
         reorderTask(
           draggableId,
           source.index,

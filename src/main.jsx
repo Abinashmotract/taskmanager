@@ -1,8 +1,11 @@
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-// Note: StrictMode is disabled because react-beautiful-dnd has compatibility issues with it
+// @hello-pangea/dnd is compatible with StrictMode and React 19
 createRoot(document.getElementById('root')).render(
-  <App />
+  <StrictMode>
+    <App />
+  </StrictMode>
 )

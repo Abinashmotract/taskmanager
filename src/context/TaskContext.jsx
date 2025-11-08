@@ -36,15 +36,10 @@ export const TaskProvider = ({ children }) => {
   // Move task between columns (for drag and drop)
   const moveTask = useCallback((taskId, sourceColumn, destinationColumn, destinationIndex) => {
     setTasks((prevTasks) => {
-      console.log('moveTask called:', { taskId, sourceColumn, destinationColumn, destinationIndex });
-      
       const task = prevTasks.find(t => t.id === taskId);
       if (!task) {
-        console.log('Task not found:', taskId);
         return prevTasks;
       }
-
-      console.log('Found task:', task);
 
       let newCompleted = task.completed;
       if (destinationColumn === 'completed') {
@@ -52,7 +47,6 @@ export const TaskProvider = ({ children }) => {
       } else if (destinationColumn === 'pending') {
         newCompleted = false;
       }
-      console.log('New completed status:', newCompleted);
 
       const updatedTask = {
         ...task,
@@ -70,13 +64,9 @@ export const TaskProvider = ({ children }) => {
         destinationColumnTasks = [...tasksWithoutMoved];
       }
 
-      console.log('Destination column tasks (before insert):', destinationColumnTasks.length);
-
       // Insert task
       const beforeTasks = destinationColumnTasks.slice(0, destinationIndex);
       const afterTasks = destinationColumnTasks.slice(destinationIndex);
-
-      console.log('Before tasks:', beforeTasks.length, 'After tasks:', afterTasks.length);
 
       // Get tasks that don't belong to the destination column
       const otherTasks = tasksWithoutMoved.filter(t => {
@@ -105,7 +95,7 @@ export const TaskProvider = ({ children }) => {
         result.push(updatedTask);
         result.push(...afterTasks);
       }
-      console.log('Final result length:', result.length);
+      
       return result;
     });
   }, [setTasks]);
