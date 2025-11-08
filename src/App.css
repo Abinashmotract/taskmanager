@@ -1,0 +1,107 @@
+/* Global animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* Task Item Animations */
+.task-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+.task-item.dragging {
+  z-index: 1000;
+  opacity: 0.9;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 600px) {
+  .MuiContainer-root {
+    padding: 1rem !important;
+  }
+
+  .MuiAppBar-root .MuiToolbar-root {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .MuiButton-root {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Bootstrap integration for responsive utilities */
+@media (min-width: 576px) {
+  .task-manager-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .task-manager-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .task-manager-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Accessibility improvements */
+.task-item:focus-within {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling for columns */
+.task-column-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Print styles */
+@media print {
+  .MuiButton-root,
+  .MuiIconButton-root {
+    display: none;
+  }
+}
